@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Web3Provider } from 'react-web3';
 import Verifier from './Verifier.js';
+import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
   constructor(){
     super();
+
     this.state = {
       cropCondition: "100",
       dateTime: new Date(),
@@ -89,6 +91,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="form-container">
+          <header className="header-container">
+            <div className="header-container">
+              <img src={logo} className="App-logo" alt="logo" />
+              <h2 className="header-title"> Right Wage </h2>
+            </div>
+            <h2 className="header-title"> Admin Portal </h2>
+          </header>
         <form>
             <div className="pair-display">
             <label>
@@ -135,6 +145,7 @@ class App extends Component {
             {/* <input type="submit" value="Submit"/> */}
           </form>
           <p id="foo">{this.state.fireAway}</p>
+        </div>
       </div>
     );
   }
