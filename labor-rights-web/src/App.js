@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import logo from './logo.svg';
 import Verifier from './Verifier.js'
 import './App.css';
 
@@ -38,6 +39,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="form-container">
+          <header>
+            <img src={logo} className="App-logo" alt="logo" />
+            <h2 className="header-title"> Right Wage </h2>
+          </header>
         <form>
             <div className="pair-display">
             <label>
@@ -77,6 +83,7 @@ class App extends Component {
             <div id="fake-submit" onClick={this.fakeHandleSubmit.bind(this)}>Submit</div>
             {/* <input type="submit" value="Submit"/> */}
           </form>
+        </div>
       </div>
     );
   }
