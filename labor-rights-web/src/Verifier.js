@@ -53,6 +53,8 @@ class Verifier extends Component{
 
 
     render(){
+        const web3Context = this.context.web3
+        console.log("Inside Verifier", web3Context)
         return (
             <div className="stakeHolder">
                 <label>
