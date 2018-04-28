@@ -41,8 +41,8 @@ class App extends Component {
     return (
       <div className="App">
         <div className="form-container">
-          <header lassName="header-container">
-            <div>
+          <header className="header-container">
+            <div className="header-container">
               <img src={logo} className="App-logo" alt="logo" />
               <h2 className="header-title"> Right Wage </h2>
             </div>
