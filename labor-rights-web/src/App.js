@@ -6,6 +6,7 @@ import './App.css';
 class App extends Component {
   constructor(){
     super();
+
     this.state = {
       cropCondition: "100",
       dateTime: new Date(),
@@ -40,9 +41,12 @@ class App extends Component {
     return (
       <div className="App">
         <div className="form-container">
-          <header>
-            <img src={logo} className="App-logo" alt="logo" />
-            <h2 className="header-title"> Right Wage </h2>
+          <header lassName="header-container">
+            <div>
+              <img src={logo} className="App-logo" alt="logo" />
+              <h2 className="header-title"> Right Wage </h2>
+            </div>
+            <h2 className="header-title"> Admin Portal </h2>
           </header>
         <form>
             <div className="pair-display">
