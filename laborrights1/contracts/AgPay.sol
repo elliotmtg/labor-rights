@@ -1,53 +1,28 @@
-pragma solidity ^0.4.4;
+pragma solidity ^0.4.6;
 
-contract Payroll {
+contract AgPay {
 
-	using SafeMath for uint256;
+    address public checker;
+    address public worker;
 
-	address public owner; 
-
-    struct payInput {
-    	uint cropcondition;
-        uint wage;
-        uint count;
-        bool checker;
-        bool worker;
-
+    struct pieceEntry {
+        address checker;
+        address worker;
+        bool approvedBychecker;
+        bool approvedByworker;
+        string pieceCondition;
+        uint pieceWeight;
+        uint pueceRate;
+        uint date;
     }
 
-    mapping(uint => payInput) public payInputs;
-    mapping (address => uint256) public balances;
-	mapping (address => uint256) public employees;
+    // this data is all publicly explorable
+    mapping(bytes32 => pieceEntry) public pieceEntries;
 
-	function Payroll() public {
-		owner=msg.sender;
-	}
-
-	function transfer(uint amount, address recipient) payable public{
-		require(balances[msg.sender] >= amount); 
-		require(balances[msg.sender] - amount <= balances[msg.sender]);
-		require(balances[recipient] + amount >= balances[recipient]);
-
-        if (cropcondition == 1 && checker = 1 && worker=1) {
-        	amount = wage * count;
-		    balances[msg.sender] -= amount;
-		    balances[msg.recipient] += amount;
-	    } else if (cropcondition == 2 && checker = 1 && worker=1) {
-	        amount = wage * count * .8;
-		    balances[msg.sender] -= amount;
-		    balances[msg.recipient] += amount;
-		} else if (cropcondition == 3 && checker = 1 && worker=1) {
-        	amount = wage * count * .5;
-		    balances[msg.sender] -= amount;
-		    balances[msg.recipient] += amount;
-	    } else if (cropcondition == 2 && checker = 1 && worker=0) {
-	        amount = wage * count * .8;
-		    balances[msg.sender] -= amount;
-		    balances[msg.recipient] += amount;
-		} else if (cropcondition == 3 && checker = 1 && worker=0) {
-	        amount = wage * count * .5;
-		    balances[msg.sender] -= amount;
-		    balances[msg.recipient] += amount;
-		} 	
-	}
+    // for event listeners    
+    event LogApprovedDocument(address approver, bytes32 docHash);
+    
+    //add view function
+ 
+    
 }
