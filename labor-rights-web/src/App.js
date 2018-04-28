@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Verifier from './Verifier.js'
+import { Web3Provider } from 'react-web3';
+import Verifier from './Verifier.js';
 import './App.css';
 
 class App extends Component {
