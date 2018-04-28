@@ -2,7 +2,50 @@
   text-align: center;
 }
 
-.App-logo {
+form{
+  display: flex;
+  flex-direction: column;
+  width: auto;
+}
+
+.pair-display{
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
+label{
+  margin: 10px;
+}
+
+input[type="submit"]{
+  width: 100px;
+  margin: auto;
+}
+
+#fake-submit{
+  width: 100px;
+  margin: auto;
+  background-color: lightblue;
+  color: black;
+  padding: 10px;
+}
+
+#fake-submit:hover{
+  cursor: pointer;
+  background-color: cadetblue;
+  color: white;
+}
+
+#check-mark{
+  color: green;
+}
+
+#x-mark{
+  color:red;
+}
+
+/* .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
@@ -25,4 +68,4 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-}
+} */
