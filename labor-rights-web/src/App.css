@@ -37,6 +37,7 @@ header {
   display: flex;
   flex-direction: row;
   margin: auto;
+  padding: 25px;
 }
 
 label{
@@ -56,17 +57,41 @@ input[type="submit"]{
   padding: 10px;
 }
 
-#fake-submit:hover{
+#fake-submit.validated:hover{
   cursor: pointer;
   background-color: cadetblue;
   color: white;
 }
 
-#check-mark{
+.unvalidated{
+  cursor: not-allowed;
+  /* pointer-events: none; */
+}
+
+.stakeHolder{
+  display: flex;
+  flex-direction: column;
+}
+
+.approval{
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
+.approval p{
+  margin: 25px;
+  font-size: 100px;
+  color: gray;
+}
+
+.validated.check-mark:hover{
+  cursor: pointer;
   color: green;
 }
 
-#x-mark{
+.validated.x-mark:hover{
+  cursor: pointer;
   color:red;
 }
 
@@ -83,15 +108,23 @@ input[type="submit"]{
   color: white;
 }
 
-.App-title {
-  font-size: 1.5em;
+#selected-x{
+  color:red;
 }
 
-.App-intro {
-  font-size: large;
+#selected-check{
+  color: green;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-} */
+@keyframes whee {
+  from {font-size: 0}
+  to {font-size: 65px}
+}
+
+#foo{
+  font-family: monospace;
+  animation: whee 1s;
+  animation-direction: alternate-reverse;
+  animation-iteration-count: infinite;
+  color: chartreuse;
+}

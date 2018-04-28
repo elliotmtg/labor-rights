@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Web3Provider } from 'react-web3';
+import Verifier from './Verifier.js';
 import logo from './logo.svg';
-import Verifier from './Verifier.js'
 import './App.css';
 
 class App extends Component {
@@ -12,29 +13,79 @@ class App extends Component {
       dateTime: new Date(),
       pieceSize: "TBD (set by farm owner)",
       wageRate: "TBD (set by farm owner)",
-      checkerSovID: "0xfoo123",
-      workerSovID: "0xbar321"
+      checkerSovID: "",
+      workerSovID: "",
+      checkerDecision: "",
+      workerDecision: "",
+      validated: "unvalidated",
+      fireAway: ""
     }
+  }
+
+  componentDidMount(){
   }
 
   setCropCondition(event){
     this.setState({cropCondition: event.target.value});
   }
 
-  setCheckerSovID(id){
-    this.setState({checkerSovID: id});
+  handleID(who, id){
+    if(who==="Worker"){
+      this.setState({workerSovID: id}, ()=>{
+      })
+    }
+    if(who==="Checker"){
+      this.setState({checkerSovID: id}, ()=>{
+      })
+    }
   }
 
-  setWorkerSovID(id){
-    this.setState({workerSovID: id});
+  handleAgreeDisagree(who, decision){
+    if(who==="Worker"){
+      this.setState({workerDecision: decision}, ()=>{
+        console.log(who + " says: I " + this.state.workerDecision)
+        this.validateDecisions();
+      })
+    }
+    if(who==="Checker"){
+      this.setState({checkerDecision: decision}, ()=>{
+        console.log(who + " says: I " + this.state.checkerDecision)
+        this.validateDecisions();
+      })
+    }
+  }
+
+  validateDecisions(){
+    if(this.state.checkerDecision !== "" && this.state.workerDecision !== ""){
+      this.setState({validated: "validated"}, ()=>{
+        console.log("Validated")
+      })
+    }
+    else{
+      console.log("Awaiting validation")
+    }
+  }
+
+  validateID(who){
+    if(who==="Worker" && this.state.workerSovID !== ""){
+      return "validated";
+    }
+    else if(who==="Checker" && this.state.checkerSovID !== ""){
+      return "validated";
+    }
+    else{
+      return "unvalidated";
+    }
   }
 
   handleSubmit(){
-    console.log("Blockchain here we come")
+    //
   }
 
   fakeHandleSubmit(){
-    console.log("Blockchain here we come")
+    if(this.state.validated==="validated"){
+      this.setState({fireAway: "BLOCKCHAIN ENGAGED: ALL SYSTEMS GO"})
+    }
   }
 
   render() {
@@ -51,16 +102,16 @@ class App extends Component {
         <form>
             <div className="pair-display">
             <label>
-              Piece Size:
+              Piece Size: 
               <input placeholder={this.state.pieceSize} readOnly/>
             </label>
             <label>
-              Wage Rate:
+              Wage Rate: 
               <input placeholder={this.state.wageRate} readOnly/>
             </label>
             </div>
             <label>
-              Crop Condition:
+              Crop Condition: 
               <select type="text" value={this.state.cropCondition} onChange={this.setCropCondition.bind(this)}>
                 <option value="100">Excellent</option>
                 <option value="80">Good</option>
@@ -68,25 +119,32 @@ class App extends Component {
               </select>
             </label>
             <label>
-              Date and Time:
+              Date and Time: 
               <input type="text" readOnly style={{width: "500px"}} placeholder={this.state.dateTime}/>
             </label>
     
             <div className="pair-display">
               <Verifier
                 stakeHolderName="Checker"
-                stakeHolderID={this.state.checkerSovID}
-                handleID={this.setCheckerSovID.bind(this)}
+                validated={
+                  this.validateID("Checker")
+                }
+                handleID={this.handleID.bind(this)}
+                handleAgreeDisagree={this.handleAgreeDisagree.bind(this)}
               />
               <Verifier
                 stakeHolderName="Worker"
-                stakeHolderID={this.state.workerSovID}
-                handleID={this.setWorkerSovID.bind(this)}
+                validated={
+                  this.validateID("Worker")
+                }
+                handleID={this.handleID.bind(this)}
+                handleAgreeDisagree={this.handleAgreeDisagree.bind(this)}
               />
             </div>
-            <div id="fake-submit" onClick={this.fakeHandleSubmit.bind(this)}>Submit</div>
+            <div className={this.state.validated} id="fake-submit" onClick={this.fakeHandleSubmit.bind(this)}>Submit</div>
             {/* <input type="submit" value="Submit"/> */}
           </form>
+          <p id="foo">{this.state.fireAway}</p>
         </div>
       </div>
     );
