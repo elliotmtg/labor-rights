@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Web3Provider } from 'react-web3';
 import Verifier from './Verifier.js';
+import PropTypes from 'prop-types';
 import logo from './logo.svg';
 import './App.css';
 
@@ -11,8 +11,8 @@ class App extends Component {
     this.state = {
       cropCondition: "100",
       dateTime: new Date(),
-      pieceSize: "TBD (set by farm owner)",
-      wageRate: "TBD (set by farm owner)",
+      pieceSize: "25",
+      wageRate: "1",
       checkerSovID: "",
       workerSovID: "",
       checkerDecision: "",
@@ -89,6 +89,16 @@ class App extends Component {
   }
 
   render() {
+    const web3context = this.context.web3;
+    console.log(web3context);
+    console.log("web3.eth: " + window.web3.eth.getBalance("0x30c70f95847fecea2ee3a454ce4a0e5310a6e231", (err, wei)=>{
+      if(err){
+        console.log(err)
+      }
+      else{
+        console.log("this is the wei " + wei);
+      }
+    }));
     return (
       <div className="App">
         <div className="form-container">
@@ -150,5 +160,7 @@ class App extends Component {
     );
   }
 }
-
+App.contextTypes = {
+  web3: PropTypes.object
+};
 export default App;
